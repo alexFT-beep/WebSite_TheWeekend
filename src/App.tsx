@@ -65,8 +65,8 @@ export default function App() {
   const navLinks = [
     { name: 'Inicio', href: '#inicio' },
     { name: 'Menú', href: '#menu' },
-    { name: 'Delivery', href: '#delivery' },
     { name: 'Reserva', href: '#reserva' },
+    { name: 'Delivery', href: '#delivery' },
     { name: 'Ubicación', href: '#ubicacion' },
     { name: 'Contacto', href: '#contacto' },
   ];
@@ -82,7 +82,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src={LOGO_URL} alt="The Weekend Logo" className="h-12 w-12 rounded-full object-cover border border-weekend-purple" />
-            <a href="/" className="text-white font-bold tracking-tighter text-lg uppercase hidden sm:block hover:text-weekend-neon transition-colors duration-500">
+            <a href="/" className="text-white font-bold tracking-tighter text-lg uppercase hidden lg:block hover:text-weekend-neon transition-colors duration-500">
               The Weekend Lounge & Restaurant
             </a>
           </div>
