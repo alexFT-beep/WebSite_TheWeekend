@@ -90,13 +90,15 @@ export default function App() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a 
+              <motion.a 
                 key={link.name} 
                 href={link.href} 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className="text-sm uppercase tracking-widest font-bold hover:text-weekend-neon transition-all duration-500 ease-in-out"
               >
                 {link.name}
-              </a>
+              </motion.a>
             ))}
           </nav>
 
@@ -132,14 +134,16 @@ export default function App() {
 
             <div className="relative z-10 flex flex-col items-center gap-8">
               {navLinks.map((link) => (
-                <a 
+                <motion.a 
                   key={link.name} 
                   href={link.href} 
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={() => setIsMenuOpen(false)}
                   className="text-2xl uppercase tracking-widest font-bold hover:text-weekend-neon transition-colors duration-500"
                 >
                   {link.name}
-                </a>
+                </motion.a>
               ))}
             </div>
 
