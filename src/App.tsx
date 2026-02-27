@@ -15,7 +15,8 @@ import {
   CreditCard, 
   ChevronRight,
   Send,
-  Smartphone
+  Smartphone,
+  Calendar
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 

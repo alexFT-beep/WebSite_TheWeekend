@@ -20,6 +20,19 @@
   filter: grayscale(100%) invert(90%) contrast(1.2);
 }
 
+/* Custom Date Picker Styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  /* Filter to achieve neon green (#00FF85) from default icon */
+  filter: invert(62%) sepia(81%) saturate(3942%) hue-rotate(122deg) brightness(103%) contrast(107%);
+  opacity: 1;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
 .neon-glow {
   box-shadow: 0 0 15px rgba(0, 255, 133, 0.4);
 }
