@@ -118,7 +118,6 @@ export default function App() {
         </div>
       </header>
 
-      {/* Mobile Nav Overlay */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div 
@@ -126,14 +125,14 @@ export default function App() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center gap-8 md:hidden overflow-hidden"
+            className="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center gap-6 landscape:gap-4 md:hidden overflow-y-auto"
           >
             <div className="absolute inset-0 z-0">
               <img src={RESPONSIVE_MENU_BG} alt="Menu Background" className="w-full h-full object-cover opacity-60" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
             </div>
 
-            <div className="relative z-10 flex flex-col items-center gap-8">
+            <div className="relative z-10 flex flex-col items-center gap-6 landscape:gap-3 py-10">
               {navLinks.map((link) => (
                 <motion.a 
                   key={link.name} 
@@ -141,14 +140,14 @@ export default function App() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-2xl uppercase tracking-widest font-bold hover:text-weekend-neon transition-colors duration-500"
+                  className="text-xl landscape:text-lg uppercase tracking-widest font-bold hover:text-weekend-neon transition-colors duration-500"
                 >
                   {link.name}
                 </motion.a>
               ))}
             </div>
 
-            <div className="absolute bottom-12 left-0 w-full text-center z-10">
+            <div className="absolute bottom-8 landscape:hidden left-0 w-full text-center z-10">
               <p className="text-weekend-purple text-xs font-bold uppercase tracking-[0.3em] mb-1">the weekend</p>
               <p className="text-weekend-neon text-[10px] font-bold uppercase tracking-[0.4em]">lounge & restaurant</p>
             </div>
