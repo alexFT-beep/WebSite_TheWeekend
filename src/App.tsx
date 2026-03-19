@@ -24,11 +24,11 @@ import { motion, AnimatePresence } from 'motion/react';
 const WHATSAPP_NUMBER = "51961336674";
 const LOGO_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771710007/theweekend-logo_kc9wd2.jpg";
 const HERO_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771710020/theweekende-inicio_bxdjf6.jpg";
-const MENU_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771715026/alitas-weekend_nka61c.jpg";
+const MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/v1773939258/weeknd_alitas_iuqskg.mp4";
 const DELIVERY_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771715674/makis-weekend_fxfha7.jpg";
 const RESERVATION_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771715677/pasta-weekend_sxpsqy.jpg";
 const FOOTER_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771715673/cocteles-weekend_iwdich.jpg";
-const RESPONSIVE_MENU_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1772136200/salon-weekend_sttl5e.png";
+const RESPONSIVE_MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/v1773939809/weeknd_zxyqad.mp4";
 const PDF_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771786883/WEKEEND_CARTA_2026_aew47m.pdf";
 
 export default function App() {
@@ -128,7 +128,15 @@ export default function App() {
             className="fixed inset-0 z-40 bg-black flex flex-col items-center justify-center gap-6 landscape:gap-4 md:hidden overflow-y-auto"
           >
             <div className="absolute inset-0 z-0">
-              <img src={RESPONSIVE_MENU_BG} alt="Menu Background" className="w-full h-full object-cover opacity-60" />
+              <video 
+                autoPlay 
+                muted 
+                loop 
+                playsInline 
+                className="w-full h-full object-cover opacity-60"
+              >
+                <source src={RESPONSIVE_MENU_VIDEO_URL} type="video/mp4" />
+              </video>
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
             </div>
 
@@ -179,7 +187,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl text-white/80 mb-10 max-w-2xl mx-auto font-light"
+            className="text-lg md:text-xl text-white mb-10 max-w-2xl mx-auto font-semibold drop-shadow-lg"
           >
             Donde la noche cobra vida. Tu fin de semana empieza aquí, llegaste al lugar donde lo sofisticado se quita la corbata y se deja llevar por el ambiente casual de una noche fina pero divertida.
           </motion.p>
@@ -213,7 +221,15 @@ export default function App() {
       {/* --- Menu Section --- */}
       <section id="menu" className="relative py-24 overflow-hidden min-h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">
-          <img src={MENU_BG} alt="Menu Background" className="w-full h-full object-cover opacity-60" />
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline 
+            className="w-full h-full object-cover opacity-60"
+          >
+            <source src={MENU_VIDEO_URL} type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black"></div>
         </div>
 
@@ -429,13 +445,16 @@ export default function App() {
               <p className="text-white/50 text-sm leading-relaxed mb-6">
                 The Weekend Lounge & Restaurant: El espacio donde la alta cocina se encuentra con el ritmo más sofisticado de la ciudad.
               </p>
-              <div className="flex items-center gap-4">
-                <a href="https://www.facebook.com/p/Weekend-Huarmey-100075916407028/?checkpoint_src=any" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-purple transition-colors">
-                  <Facebook size={20} />
-                </a>
-                <a href="https://www.instagram.com/weekend_huarmey/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-fuchsia transition-colors">
-                  <Instagram size={20} />
-                </a>
+              <div className="space-y-4">
+                <p className="text-weekend-neon font-bold uppercase tracking-widest text-xs">¡Síguenos!</p>
+                <div className="flex items-center gap-4">
+                  <a href="https://www.facebook.com/p/Weekend-Huarmey-100075916407028/?checkpoint_src=any" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-purple transition-colors">
+                    <Facebook size={20} />
+                  </a>
+                  <a href="https://www.instagram.com/weekend_huarmey/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-fuchsia transition-colors">
+                    <Instagram size={20} />
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -461,7 +480,6 @@ export default function App() {
                   <span className="px-3 py-1 bg-white/5 rounded-md text-[10px] uppercase font-bold tracking-widest">Yape</span>
                   <span className="px-3 py-1 bg-white/5 rounded-md text-[10px] uppercase font-bold tracking-widest">Plin</span>
                   <span className="px-3 py-1 bg-white/5 rounded-md text-[10px] uppercase font-bold tracking-widest">Visa</span>
-                  <span className="px-3 py-1 bg-white/5 rounded-md text-[10px] uppercase font-bold tracking-widest">Mastercard</span>
                 </div>
               </div>
             </div>
