@@ -15,7 +15,6 @@
     @apply bg-black text-white selection:bg-weekend-neon selection:text-black;
   }
 
-  /* Custom Scrollbar Styles */
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -39,10 +38,8 @@
   filter: grayscale(100%) invert(90%) contrast(1.2);
 }
 
-/* Custom Date Picker Styling */
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
-  /* Filter to achieve neon green (#00FF85) from default icon */
   filter: invert(62%) sepia(81%) saturate(3942%) hue-rotate(122deg) brightness(103%) contrast(107%);
   opacity: 1;
 }

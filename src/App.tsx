@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Menu, 
   X, 
@@ -20,7 +20,6 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-// --- Constants ---
 const WHATSAPP_NUMBER = "51961336674";
 const LOGO_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771710007/theweekend-logo_kc9wd2.jpg";
 const HERO_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771710020/theweekende-inicio_bxdjf6.jpg";
@@ -35,7 +34,6 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Form State
   const [formData, setFormData] = useState({
     nombre: '',
     fecha: '',
@@ -45,7 +43,7 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -63,18 +61,17 @@ export default function App() {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
   };
 
-  const navLinks = [
+  const navLinks = useMemo(() => [
     { name: 'Inicio', href: '#inicio' },
     { name: 'Menú', href: '#menu' },
     { name: 'Reserva', href: '#reserva' },
     { name: 'Delivery', href: '#delivery' },
     { name: 'Ubicación', href: '#ubicacion' },
     { name: 'Contacto', href: '#contacto' },
-  ];
+  ], []);
 
   return (
     <div className="min-h-screen font-sans selection:bg-weekend-neon selection:text-black">
-      {/* --- Header --- */}
       <header 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled ? 'bg-black/90 backdrop-blur-md py-2 border-b border-white/10' : 'bg-transparent py-4'
@@ -82,13 +79,19 @@ export default function App() {
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={LOGO_URL} alt="The Weekend Logo" className="h-12 w-12 rounded-full object-cover border border-weekend-purple" />
+            <img 
+              src={LOGO_URL} 
+              alt="The Weekend Logo" 
+              className="h-12 w-12 rounded-full object-cover border border-weekend-purple"
+              loading="eager"
+              decoding="async"
+              referrerPolicy="no-referrer"
+            />
             <a href="/" className="text-white font-bold tracking-tighter text-lg uppercase hidden lg:block hover:text-weekend-neon transition-colors duration-500">
               The Weekend Lounge & Restaurant
             </a>
           </div>
 
-          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <motion.a 
@@ -103,10 +106,10 @@ export default function App() {
             ))}
           </nav>
 
-          {/* Mobile Menu Toggle */}
           <button 
             className={`md:hidden p-2 transition-colors duration-500 z-50 ${isMenuOpen ? 'text-weekend-purple' : 'text-white'}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle Menu"
           >
             <motion.div
               animate={isMenuOpen ? { rotate: 90 } : { rotate: 0 }}
@@ -133,6 +136,7 @@ export default function App() {
                 muted 
                 loop 
                 playsInline 
+                preload="auto"
                 className="w-full h-full object-cover opacity-60"
               >
                 <source src={RESPONSIVE_MENU_VIDEO_URL} type="video/mp4" />
@@ -163,13 +167,15 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* --- Hero Section --- */}
       <section id="inicio" className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src={HERO_BG} 
             alt="Hero Background" 
             className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black"></div>
         </div>
@@ -218,7 +224,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- Menu Section --- */}
       <section id="menu" className="relative py-24 overflow-hidden min-h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <video 
@@ -226,6 +231,7 @@ export default function App() {
             muted 
             loop 
             playsInline 
+            preload="metadata"
             className="w-full h-full object-cover opacity-60"
           >
             <source src={MENU_VIDEO_URL} type="video/mp4" />
@@ -266,10 +272,16 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- Reservation Section --- */}
       <section id="reserva" className="relative py-24">
         <div className="absolute inset-0 z-0">
-          <img src={RESERVATION_BG} alt="Reservation Background" className="w-full h-full object-cover opacity-50" />
+          <img 
+            src={RESERVATION_BG} 
+            alt="Reservation Background" 
+            className="w-full h-full object-cover opacity-50"
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/50 to-black"></div>
         </div>
 
@@ -372,10 +384,16 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- Delivery Section --- */}
       <section id="delivery" className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src={DELIVERY_BG} alt="Delivery Background" className="w-full h-full object-cover opacity-50" />
+          <img 
+            src={DELIVERY_BG} 
+            alt="Delivery Background" 
+            className="w-full h-full object-cover opacity-50"
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/20 to-black"></div>
         </div>
 
@@ -399,7 +417,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- Location Section --- */}
       <section id="ubicacion" className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -423,15 +440,22 @@ export default function App() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              title="Google Maps Location"
             ></iframe>
           </motion.div>
         </div>
       </section>
 
-      {/* --- Footer --- */}
       <footer id="contacto" className="relative pt-24 pb-12 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src={FOOTER_BG} alt="Footer Background" className="w-full h-full object-cover opacity-50" />
+          <img 
+            src={FOOTER_BG} 
+            alt="Footer Background" 
+            className="w-full h-full object-cover opacity-50"
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black"></div>
         </div>
 
@@ -439,7 +463,14 @@ export default function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
             <div className="col-span-1 lg:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-                <img src={LOGO_URL} alt="Logo" className="h-10 w-10 rounded-full object-cover border border-weekend-purple" />
+                <img 
+                  src={LOGO_URL} 
+                  alt="Logo" 
+                  className="h-10 w-10 rounded-full object-cover border border-weekend-purple"
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                />
                 <span className="text-white font-bold tracking-tighter text-lg uppercase">The Weekend</span>
               </div>
               <p className="text-white/50 text-sm leading-relaxed mb-6">
@@ -448,10 +479,10 @@ export default function App() {
               <div className="space-y-4">
                 <p className="text-weekend-neon font-bold uppercase tracking-widest text-xs">¡Síguenos!</p>
                 <div className="flex items-center gap-4">
-                  <a href="https://www.facebook.com/p/Weekend-Huarmey-100075916407028/?checkpoint_src=any" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-purple transition-colors">
+                  <a href="https://www.facebook.com/p/Weekend-Huarmey-100075916407028/?checkpoint_src=any" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-purple transition-colors" aria-label="Facebook">
                     <Facebook size={20} />
                   </a>
-                  <a href="https://www.instagram.com/weekend_huarmey/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-fuchsia transition-colors">
+                  <a href="https://www.instagram.com/weekend_huarmey/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-fuchsia transition-colors" aria-label="Instagram">
                     <Instagram size={20} />
                   </a>
                 </div>
