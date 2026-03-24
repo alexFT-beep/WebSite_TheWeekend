@@ -202,7 +202,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4"
           >
             <button 
               onClick={() => document.getElementById('reserva')?.scrollIntoView({ behavior: 'smooth' })}
@@ -215,6 +215,12 @@ export default function App() {
               className="w-full sm:w-auto px-8 py-4 border-2 border-weekend-neon text-weekend-neon font-bold uppercase tracking-widest rounded-full hover:bg-weekend-neon hover:text-black transition-all duration-300"
             >
               Ver Menú
+            </button>
+            <button 
+              onClick={handleDelivery}
+              className="w-full sm:w-auto px-8 py-4 border-2 border-weekend-neon text-weekend-neon font-bold uppercase tracking-widest rounded-full hover:bg-weekend-neon hover:text-black transition-all duration-300"
+            >
+              Pedir Delivery
             </button>
           </motion.div>
         </div>
