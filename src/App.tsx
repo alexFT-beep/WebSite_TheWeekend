@@ -16,13 +16,13 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 
 const WHATSAPP_NUMBER = "51961336674";
-const LOGO_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1774380039/logo2_vyasrd.webp";
-const HERO_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771710020/theweekende-inicio_bxdjf6.jpg";
-const MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/v1774380723/alitas2_upllif.webm";
+const LOGO_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774383788/LOGO_wgvqfj.webp";
+const HERO_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774380039/logo2_vyasrd.webp";
+const MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1774380723/alitas2_upllif.webm";
 const DELIVERY_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771715674/makis-weekend_fxfha7.jpg";
-const RESERVATION_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1774381246/reserva_dxdyyt.webp";
-const FOOTER_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1774380038/piepag_lni8ko.webp";
-const RESPONSIVE_MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/v1774380798/hambur2_lhdl97.webm";
+const RESERVATION_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774381246/reserva_dxdyyt.webp";
+const FOOTER_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774380038/piepag_lni8ko.webp";
+const RESPONSIVE_MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1774380798/hambur2_lhdl97.webm";
 const PDF_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771786883/WEKEEND_CARTA_2026_aew47m.pdf";
 
 export default function App() {
@@ -78,7 +78,7 @@ export default function App() {
               src={LOGO_URL} 
               alt="The Weekend Logo" 
               className="h-12 w-12 rounded-full object-cover border border-weekend-purple"
-              loading="eager"
+              loading="lazy"
               decoding="async"
               referrerPolicy="no-referrer"
             />
@@ -131,7 +131,7 @@ export default function App() {
                 muted 
                 loop 
                 playsInline 
-                preload="auto"
+                preload="none"
                 className="w-full h-full object-cover opacity-60"
               >
                 <source src={RESPONSIVE_MENU_VIDEO_URL} type="video/webm" />
@@ -232,7 +232,7 @@ export default function App() {
             muted 
             loop 
             playsInline 
-            preload="metadata"
+            preload="none" 
             className="w-full h-full object-cover opacity-60"
           >
             <source src={MENU_VIDEO_URL} type="video/webm" />
@@ -464,14 +464,14 @@ export default function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
             <div className="col-span-1 lg:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-                <img 
-                  src={LOGO_URL} 
-                  alt="Logo" 
-                  className="h-10 w-10 rounded-full object-cover border border-weekend-purple"
-                  loading="lazy"
-                  decoding="async"
-                  referrerPolicy="no-referrer"
-                />
+          <img 
+            src={LOGO_URL} 
+            alt="Logo" 
+            className="h-10 w-10 rounded-full object-cover border border-weekend-purple"
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
                 <span className="text-white font-bold tracking-tighter text-lg uppercase">The Weekend</span>
               </div>
               <p className="text-white/50 text-sm leading-relaxed mb-6">
