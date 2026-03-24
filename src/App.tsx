@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Menu, 
@@ -21,14 +16,14 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 
 const WHATSAPP_NUMBER = "51961336674";
-const LOGO_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771710007/theweekend-logo_kc9wd2.jpg";
-const HERO_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771710020/theweekende-inicio_bxdjf6.jpg";
-const MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/v1773939258/weeknd_alitas_iuqskg.mp4";
-const DELIVERY_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771715674/makis-weekend_fxfha7.jpg";
-const RESERVATION_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771715677/pasta-weekend_sxpsqy.jpg";
-const FOOTER_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771715673/cocteles-weekend_iwdich.jpg";
-const RESPONSIVE_MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/v1773939809/weeknd_zxyqad.mp4";
-const PDF_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771786883/WEKEEND_CARTA_2026_aew47m.pdf";
+const LOGO_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771710007/theweekend-logo_kc9wd2.jpg";
+const HERO_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771710020/theweekende-inicio_bxdjf6.jpg";
+const MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1773939258/weeknd_alitas_iuqskg.mp4";
+const DELIVERY_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771715674/makis-weekend_fxfha7.jpg";
+const RESERVATION_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771715677/pasta-weekend_sxpsqy.jpg";
+const FOOTER_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771715673/cocteles-weekend_iwdich.jpg";
+const RESPONSIVE_MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1773939809/weeknd_zxyqad.mp4";
+const PDF_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771786883/WEKEEND_CARTA_2026_aew47m.pdf";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
