@@ -16,14 +16,14 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 
 const WHATSAPP_NUMBER = "51961336674";
-const LOGO_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771710007/theweekend-logo_kc9wd2.jpg";
+const LOGO_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1774380039/logo2_vyasrd.webp";
 const HERO_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771710020/theweekende-inicio_bxdjf6.jpg";
-const MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1773939258/weeknd_alitas_iuqskg.mp4";
+const MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/v1774380723/alitas2_upllif.webm";
 const DELIVERY_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771715674/makis-weekend_fxfha7.jpg";
-const RESERVATION_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771715677/pasta-weekend_sxpsqy.jpg";
-const FOOTER_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771715673/cocteles-weekend_iwdich.jpg";
-const RESPONSIVE_MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1773939809/weeknd_zxyqad.mp4";
-const PDF_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771786883/WEKEEND_CARTA_2026_aew47m.pdf";
+const RESERVATION_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1774381246/reserva_dxdyyt.webp";
+const FOOTER_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1774380038/piepag_lni8ko.webp";
+const RESPONSIVE_MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/v1774380798/hambur2_lhdl97.webm";
+const PDF_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771786883/WEKEEND_CARTA_2026_aew47m.pdf";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -134,7 +134,7 @@ export default function App() {
                 preload="auto"
                 className="w-full h-full object-cover opacity-60"
               >
-                <source src={RESPONSIVE_MENU_VIDEO_URL} type="video/mp4" />
+                <source src={RESPONSIVE_MENU_VIDEO_URL} type="video/webm" />
               </video>
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
             </div>
@@ -235,7 +235,7 @@ export default function App() {
             preload="metadata"
             className="w-full h-full object-cover opacity-60"
           >
-            <source src={MENU_VIDEO_URL} type="video/mp4" />
+            <source src={MENU_VIDEO_URL} type="video/webm" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black"></div>
         </div>
@@ -278,12 +278,12 @@ export default function App() {
           <img 
             src={RESERVATION_BG} 
             alt="Reservation Background" 
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover opacity-70"
             loading="lazy"
             decoding="async"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/50 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/30 to-black"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4">
@@ -390,12 +390,12 @@ export default function App() {
           <img 
             src={DELIVERY_BG} 
             alt="Delivery Background" 
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover opacity-70"
             loading="lazy"
             decoding="async"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/20 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/10 to-black"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
@@ -452,12 +452,12 @@ export default function App() {
           <img 
             src={FOOTER_BG} 
             alt="Footer Background" 
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover opacity-70"
             loading="lazy"
             decoding="async"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-black"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4">
