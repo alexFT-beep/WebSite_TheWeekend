@@ -32,9 +32,18 @@ export default function App() {
   const [formData, setFormData] = useState({
     nombre: '',
     fecha: '',
+    hora: '05:00 PM',
     personas: '',
     motivo: ''
   });
+  const [error, setError] = useState<string | null>(null);
+
+  const businessHours = [
+    '05:00 PM', '05:30 PM', '06:00 PM', '06:30 PM', '07:00 PM', '07:30 PM',
+    '08:00 PM', '08:30 PM', '09:00 PM', '09:30 PM', '10:00 PM', '10:30 PM',
+    '11:00 PM', '11:30 PM', '12:00 AM', '12:30 AM', '01:00 AM', '01:30 AM',
+    '02:00 AM', '02:30 AM', '03:00 AM'
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -44,8 +53,10 @@ export default function App() {
 
   const handleReservation = (e: React.FormEvent) => {
     e.preventDefault();
-    const { nombre, fecha, personas, motivo } = formData;
-    const message = `Hola The Weekend! Deseo una reserva: Nombre: ${nombre}, Fecha: ${fecha}, Personas: ${personas}, Motivo: ${motivo}`;
+    setError(null);
+    const { nombre, fecha, hora, personas, motivo } = formData;
+    
+    const message = `Hola The Weekend! Deseo una reserva: Nombre: ${nombre}, Fecha: ${fecha}, Hora: ${hora}, Personas: ${personas}, Motivo: ${motivo}`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
   };
@@ -82,12 +93,12 @@ export default function App() {
               decoding="async"
               referrerPolicy="no-referrer"
             />
-            <a href="/" className="text-white font-bold tracking-tighter text-lg uppercase hidden lg:block hover:text-weekend-neon transition-colors duration-500">
-              The Weekend Lounge & Restaurant
+            <a href="/" className="text-white font-bold tracking-tighter text-lg uppercase hidden xl:block hover:text-weekend-neon transition-colors duration-500">
+              The Weekend! - huarmey
             </a>
           </div>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <motion.a 
                 key={link.name} 
@@ -102,7 +113,7 @@ export default function App() {
           </nav>
 
           <button 
-            className={`md:hidden p-2 transition-colors duration-500 z-50 ${isMenuOpen ? 'text-weekend-purple' : 'text-white'}`}
+            className={`lg:hidden p-2 transition-colors duration-500 z-50 ${isMenuOpen ? 'text-weekend-purple' : 'text-white'}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle Menu"
           >
@@ -155,8 +166,8 @@ export default function App() {
             </div>
 
             <div className="absolute bottom-8 landscape:hidden left-0 w-full text-center z-10">
-              <p className="text-weekend-purple text-xs font-bold uppercase tracking-[0.3em] mb-1">the weekend</p>
-              <p className="text-weekend-neon text-[10px] font-bold uppercase tracking-[0.4em]">lounge & restaurant</p>
+              <p className="text-weekend-purple text-xs font-bold uppercase tracking-[0.3em] mb-1">the weekend!</p>
+              <p className="text-weekend-neon text-[10px] font-bold uppercase tracking-[0.4em]">- huarmey -</p>
             </div>
           </motion.div>
         )}
@@ -295,21 +306,23 @@ export default function App() {
             >
               <h2 className="text-weekend-purple text-sm font-bold tracking-[0.3em] uppercase mb-4">Planifica tu noche</h2>
               <h3 className="text-4xl md:text-6xl font-black uppercase mb-8 leading-tight">Asegura tu <span className="text-weekend-purple">Mesa</span></h3>
-              <p className="text-white/60 text-lg mb-8">
+              <p className="text-white/60 text-base md:text-lg mb-8 leading-relaxed">
                 Vive la experiencia completa en The Weekend. Ya sea para un cumpleaños, una cita o una salida con amigos, reserva con anticipación y déjanos encargarnos del resto.
               </p>
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-weekend-purple/20 rounded-xl text-weekend-purple">
+                  <div className="p-3 bg-weekend-purple/20 rounded-xl text-weekend-purple shrink-0">
                     <Clock size={24} />
                   </div>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <h4 className="font-bold uppercase text-sm tracking-wider mb-1">Horario de Atención</h4>
-                    <p className="text-white/50">Abierto diariamente de 5:00 PM a 3:00 AM</p>
-                    <div className="mt-4 flex items-center gap-2 text-weekend-neon">
-                      <Phone size={18} />
-                      <span className="text-sm font-medium">Contacto: para cualquier consulta: +51 961 336 674</span>
+                    <p className="text-white/50 text-sm md:text-base">Abierto diariamente de 5:00 PM a 3:00 AM</p>
+                    <div className="mt-4 flex items-start sm:items-center gap-2 text-weekend-neon">
+                      <Phone size={18} className="shrink-0 mt-0.5 sm:mt-0" />
+                      <span className="text-xs sm:text-sm font-medium leading-tight">
+                        Contacto para consultas: <span className="whitespace-nowrap">+51 961 336 674</span>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -359,20 +372,43 @@ export default function App() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Motivo</label>
+                    <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Hora de llegada</label>
                     <select 
-                      className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-weekend-purple transition-colors appearance-none"
-                      value={formData.motivo}
-                      onChange={(e) => setFormData({...formData, motivo: e.target.value})}
+                      className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-weekend-purple transition-colors appearance-none cursor-pointer"
+                      value={formData.hora}
+                      onChange={(e) => setFormData({...formData, hora: e.target.value})}
                     >
-                      <option value="">Seleccionar</option>
-                      <option value="Cena Casual">Cena Casual</option>
-                      <option value="Cumpleaños">Cumpleaños</option>
-                      <option value="Aniversario">Aniversario</option>
-                      <option value="Evento Corporativo">Evento Corporativo</option>
+                      {businessHours.map((time) => (
+                        <option key={time} value={time}>{time}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
+                <div className="space-y-2">
+                  <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Motivo</label>
+                  <select 
+                    className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-weekend-purple transition-colors appearance-none"
+                    value={formData.motivo}
+                    onChange={(e) => setFormData({...formData, motivo: e.target.value})}
+                  >
+                    <option value="">Seleccionar</option>
+                    <option value="Cena Casual">Cena Casual</option>
+                    <option value="Cumpleaños">Cumpleaños</option>
+                    <option value="Aniversario">Aniversario</option>
+                    <option value="Evento Corporativo">Evento Corporativo</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+
+                {error && (
+                  <motion.p 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-500 text-xs font-bold uppercase tracking-wider text-center"
+                  >
+                    {error}
+                  </motion.p>
+                )}
                 <button 
                   type="submit"
                   className="w-full py-4 bg-weekend-purple text-white font-black uppercase tracking-[0.2em] rounded-xl hover:bg-weekend-purple/80 transition-all flex items-center justify-center gap-3"
@@ -472,10 +508,10 @@ export default function App() {
             decoding="async"
             referrerPolicy="no-referrer"
           />
-                <span className="text-white font-bold tracking-tighter text-lg uppercase">The Weekend</span>
+                <span className="text-white font-bold tracking-tighter text-lg uppercase">The Weekend! - huarmey</span>
               </div>
               <p className="text-white/50 text-sm leading-relaxed mb-6">
-                The Weekend Lounge & Restaurant: El espacio donde la alta cocina se encuentra con el ritmo más sofisticado de la ciudad.
+                The Weekend! - huarmey: El espacio donde la alta cocina se encuentra con el ritmo más sofisticado de la ciudad.
               </p>
               <div className="space-y-4">
                 <p className="text-weekend-neon font-bold uppercase tracking-widest text-xs">¡Síguenos!</p>
