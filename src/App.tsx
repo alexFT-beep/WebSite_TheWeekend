@@ -1,96 +1,78 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
-  Menu, 
-  X, 
-  Instagram, 
-  Facebook, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  CreditCard, 
-  ChevronRight,
-  Send,
-  Smartphone,
-  Calendar
+  Menu, X, Instagram, Facebook, Phone, MapPin, Clock, CreditCard, ChevronRight, Send, Smartphone, Calendar
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const WHATSAPP_NUMBER = "51961336674";
+const CONTACT_WA = "51961336674";
 const LOGO_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774383788/LOGO_wgvqfj.webp";
-const HERO_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774380039/logo2_vyasrd.webp";
-const MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1774380723/alitas2_upllif.webm";
-const DELIVERY_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771715674/makis-weekend_fxfha7.jpg";
-const RESERVATION_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774381246/reserva_dxdyyt.webp";
-const FOOTER_BG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774380038/piepag_lni8ko.webp";
-const RESPONSIVE_MENU_VIDEO_URL = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1774380798/hambur2_lhdl97.webm";
-const PDF_URL = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771786883/WEKEEND_CARTA_2026_aew47m.pdf";
+const HERO_IMG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774380039/logo2_vyasrd.webp";
+const MENU_VID = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1774380723/alitas2_upllif.webm";
+const DELIVERY_IMG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1771715674/makis-weekend_fxfha7.jpg";
+const RESERVA_IMG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774381246/reserva_dxdyyt.webp";
+const FOOTER_IMG = "https://res.cloudinary.com/dwlzez9mr/image/upload/f_auto,q_auto/v1774380038/piepag_lni8ko.webp";
+const MOBILE_VID = "https://res.cloudinary.com/dwlzez9mr/video/upload/f_auto,q_auto/v1774380798/hambur2_lhdl97.webm";
+const CARTA_PDF = "https://res.cloudinary.com/dwlzez9mr/image/upload/v1771786883/WEKEEND_CARTA_2026_aew47m.pdf";
+
+const NAV_LINKS = [
+  { name: 'Inicio', href: '#inicio' },
+  { name: 'Menú', href: '#menu' },
+  { name: 'Reserva', href: '#reserva' },
+  { name: 'Delivery', href: '#delivery' },
+  { name: 'Ubicación', href: '#ubicacion' },
+  { name: 'Contacto', href: '#contacto' },
+];
+
+const TIME_SLOTS = [
+  '05:00 PM', '05:30 PM', '06:00 PM', '06:30 PM', '07:00 PM', '07:30 PM',
+  '08:00 PM', '08:30 PM', '09:00 PM', '09:30 PM', '10:00 PM', '10:30 PM',
+  '11:00 PM', '11:30 PM', '12:00 AM', '12:30 AM', '01:00 AM', '01:30 AM',
+  '02:00 AM', '02:30 AM', '03:00 AM'
+];
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const [form, setForm] = useState({
     nombre: '',
     fecha: '',
     hora: '05:00 PM',
     personas: '',
     motivo: ''
   });
-  const [error, setError] = useState<string | null>(null);
-
-  const businessHours = [
-    '05:00 PM', '05:30 PM', '06:00 PM', '06:30 PM', '07:00 PM', '07:30 PM',
-    '08:00 PM', '08:30 PM', '09:00 PM', '09:30 PM', '10:00 PM', '10:30 PM',
-    '11:00 PM', '11:30 PM', '12:00 AM', '12:30 AM', '01:00 AM', '01:30 AM',
-    '02:00 AM', '02:30 AM', '03:00 AM'
-  ];
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleReservation = (e: React.FormEvent) => {
+  const handleReserve = (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    const { nombre, fecha, hora, personas, motivo } = formData;
-    
+    const { nombre, fecha, hora, personas, motivo } = form;
     const message = `Hola The Weekend! Deseo una reserva: Nombre: ${nombre}, Fecha: ${fecha}, Hora: ${hora}, Personas: ${personas}, Motivo: ${motivo}`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/${CONTACT_WA}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const handleDelivery = () => {
     const message = "Hola! Deseo hacer un pedido de delivery.";
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/${CONTACT_WA}?text=${encodeURIComponent(message)}`, '_blank');
   };
-
-  const navLinks = useMemo(() => [
-    { name: 'Inicio', href: '#inicio' },
-    { name: 'Menú', href: '#menu' },
-    { name: 'Reserva', href: '#reserva' },
-    { name: 'Delivery', href: '#delivery' },
-    { name: 'Ubicación', href: '#ubicacion' },
-    { name: 'Contacto', href: '#contacto' },
-  ], []);
 
   return (
     <div className="min-h-screen font-sans selection:bg-weekend-neon selection:text-black">
       <header 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? 'bg-black/90 backdrop-blur-md py-2 border-b border-white/10' : 'bg-transparent py-4'
+          isScrolled ? 'bg-black/90 backdrop-blur-md py-2 border-b border-white/10' : 'bg-transparent py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img 
               src={LOGO_URL} 
-              alt="The Weekend Logo" 
+              alt="Logo" 
               className="h-12 w-12 rounded-full object-cover border border-weekend-purple"
-              loading="lazy"
-              decoding="async"
               referrerPolicy="no-referrer"
             />
             <a href="/" className="text-white font-bold tracking-tighter text-lg uppercase hidden xl:block hover:text-weekend-neon transition-colors duration-500">
@@ -99,13 +81,13 @@ export default function App() {
           </div>
 
           <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <motion.a 
                 key={link.name} 
                 href={link.href} 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-sm uppercase tracking-widest font-bold hover:text-weekend-neon transition-all duration-500 ease-in-out"
+                className="text-sm uppercase tracking-widest font-bold hover:text-weekend-neon transition-all duration-500"
               >
                 {link.name}
               </motion.a>
@@ -113,22 +95,21 @@ export default function App() {
           </nav>
 
           <button 
-            className={`lg:hidden p-2 transition-colors duration-500 z-50 ${isMenuOpen ? 'text-weekend-purple' : 'text-white'}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle Menu"
+            className={`lg:hidden p-2 transition-colors duration-500 z-50 ${isOpen ? 'text-weekend-purple' : 'text-white'}`}
+            onClick={() => setIsOpen(!isOpen)}
           >
             <motion.div
-              animate={isMenuOpen ? { rotate: 90 } : { rotate: 0 }}
+              animate={isOpen ? { rotate: 90 } : { rotate: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
             </motion.div>
           </button>
         </div>
       </header>
 
       <AnimatePresence>
-        {isMenuOpen && (
+        {isOpen && (
           <motion.div 
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
@@ -142,22 +123,21 @@ export default function App() {
                 muted 
                 loop 
                 playsInline 
-                preload="none"
                 className="w-full h-full object-cover opacity-60"
               >
-                <source src={RESPONSIVE_MENU_VIDEO_URL} type="video/webm" />
+                <source src={MOBILE_VID} type="video/webm" />
               </video>
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
             </div>
 
             <div className="relative z-10 flex flex-col items-center gap-6 landscape:gap-3 py-10">
-              {navLinks.map((link) => (
+              {NAV_LINKS.map((link) => (
                 <motion.a 
                   key={link.name} 
                   href={link.href} 
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => setIsOpen(false)}
                   className="text-xl landscape:text-lg uppercase tracking-widest font-bold hover:text-weekend-neon transition-colors duration-500"
                 >
                   {link.name}
@@ -176,11 +156,9 @@ export default function App() {
       <section id="inicio" className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src={HERO_BG} 
-            alt="Hero Background" 
+            src={HERO_IMG} 
+            alt="Hero" 
             className="w-full h-full object-cover"
-            loading="eager"
-            decoding="async"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black"></div>
@@ -201,7 +179,7 @@ export default function App() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg md:text-xl text-white mb-10 max-w-2xl mx-auto font-semibold drop-shadow-lg"
           >
-            Donde la noche cobra vida. Tu fin de semana empieza aquí, llegaste al lugar donde lo sofisticado se quita la corbata y se deja llevar por el ambiente casual de una noche fina pero divertida.
+            Tu fin de semana empieza aquí, llegaste al lugar donde lo sofisticado se quita la corbata y se deja llevar por el ambiente casual de una noche fina pero divertida.
           </motion.p>
           
           <motion.div 
@@ -243,10 +221,9 @@ export default function App() {
             muted 
             loop 
             playsInline 
-            preload="none" 
             className="w-full h-full object-cover opacity-60"
           >
-            <source src={MENU_VIDEO_URL} type="video/webm" />
+            <source src={MENU_VID} type="video/webm" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black"></div>
         </div>
@@ -261,7 +238,7 @@ export default function App() {
             <h2 className="text-weekend-fuchsia text-sm font-bold tracking-[0.3em] uppercase mb-4">Nuestra Propuesta</h2>
             <h3 className="text-4xl md:text-6xl font-black uppercase mb-6">La Carta</h3>
             <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-              Nuestra Carta: Alitas en más de 20 salsas artesanales, piqueos criollos, hamburguesas gourmet, pastas y makis maridados con coctelería de autor.
+              Alitas en más de 20 salsas artesanales, piqueos criollos, hamburguesas gourmet, pastas y makis maridados con coctelería de autor.
             </p>
           </motion.div>
 
@@ -272,7 +249,7 @@ export default function App() {
             className="flex justify-center"
           >
             <a 
-              href={PDF_URL} 
+              href={CARTA_PDF} 
               target="_blank" 
               rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-3 px-10 py-5 bg-transparent border-2 border-weekend-neon text-weekend-neon font-black uppercase tracking-widest rounded-full hover:bg-black hover:text-weekend-neon transition-all duration-500 animate-pulse-neon"
@@ -287,11 +264,9 @@ export default function App() {
       <section id="reserva" className="relative py-24">
         <div className="absolute inset-0 z-0">
           <img 
-            src={RESERVATION_BG} 
-            alt="Reservation Background" 
+            src={RESERVA_IMG} 
+            alt="Reserva" 
             className="w-full h-full object-cover opacity-70"
-            loading="lazy"
-            decoding="async"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/30 to-black"></div>
@@ -335,7 +310,7 @@ export default function App() {
               viewport={{ once: true }}
               className="bg-zinc-900/50 backdrop-blur-xl p-8 md:p-12 rounded-3xl border border-white/10 neon-glow-purple"
             >
-              <form onSubmit={handleReservation} className="space-y-6">
+              <form onSubmit={handleReserve} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Nombre</label>
@@ -344,8 +319,8 @@ export default function App() {
                       required
                       placeholder="Tu nombre"
                       className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-weekend-purple transition-colors"
-                      value={formData.nombre}
-                      onChange={(e) => setFormData({...formData, nombre: e.target.value})}
+                      value={form.nombre}
+                      onChange={(e) => setForm({...form, nombre: e.target.value})}
                     />
                   </div>
                   <div className="space-y-2">
@@ -354,8 +329,8 @@ export default function App() {
                       type="date" 
                       required
                       className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-weekend-purple transition-colors"
-                      value={formData.fecha}
-                      onChange={(e) => setFormData({...formData, fecha: e.target.value})}
+                      value={form.fecha}
+                      onChange={(e) => setForm({...form, fecha: e.target.value})}
                     />
                   </div>
                 </div>
@@ -367,19 +342,19 @@ export default function App() {
                       required
                       placeholder="Cantidad"
                       className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-weekend-purple transition-colors"
-                      value={formData.personas}
-                      onChange={(e) => setFormData({...formData, personas: e.target.value})}
+                      value={form.personas}
+                      onChange={(e) => setForm({...form, personas: e.target.value})}
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Hora de llegada</label>
                     <select 
                       className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-weekend-purple transition-colors appearance-none cursor-pointer"
-                      value={formData.hora}
-                      onChange={(e) => setFormData({...formData, hora: e.target.value})}
+                      value={form.hora}
+                      onChange={(e) => setForm({...form, hora: e.target.value})}
                     >
-                      {businessHours.map((time) => (
-                        <option key={time} value={time}>{time}</option>
+                      {TIME_SLOTS.map((t) => (
+                        <option key={t} value={t}>{t}</option>
                       ))}
                     </select>
                   </div>
@@ -388,8 +363,8 @@ export default function App() {
                   <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Motivo</label>
                   <select 
                     className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-weekend-purple transition-colors appearance-none"
-                    value={formData.motivo}
-                    onChange={(e) => setFormData({...formData, motivo: e.target.value})}
+                    value={form.motivo}
+                    onChange={(e) => setForm({...form, motivo: e.target.value})}
                   >
                     <option value="">Seleccionar</option>
                     <option value="Cena Casual">Cena Casual</option>
@@ -400,15 +375,6 @@ export default function App() {
                   </select>
                 </div>
 
-                {error && (
-                  <motion.p 
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-red-500 text-xs font-bold uppercase tracking-wider text-center"
-                  >
-                    {error}
-                  </motion.p>
-                )}
                 <button 
                   type="submit"
                   className="w-full py-4 bg-weekend-purple text-white font-black uppercase tracking-[0.2em] rounded-xl hover:bg-weekend-purple/80 transition-all flex items-center justify-center gap-3"
@@ -424,11 +390,9 @@ export default function App() {
       <section id="delivery" className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src={DELIVERY_BG} 
-            alt="Delivery Background" 
+            src={DELIVERY_IMG} 
+            alt="Delivery" 
             className="w-full h-full object-cover opacity-70"
-            loading="lazy"
-            decoding="async"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/10 to-black"></div>
@@ -461,7 +425,7 @@ export default function App() {
             <h3 className="text-4xl md:text-6xl font-black uppercase mb-6">Ubicación</h3>
             <div className="flex items-center justify-center gap-2 text-white/60">
               <MapPin size={20} className="text-weekend-neon" />
-              <p>Av. Cabo 140, Huarmey 02651 (Referencia, al frente del hotel Jessica)</p>
+              <p>Av. Cabo 140, Huarmey 02651</p>
             </div>
           </div>
 
@@ -475,9 +439,7 @@ export default function App() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d245.6409801721048!2d-78.15328299958676!3d-10.068675181619353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91aa17e1bee947c9%3A0xda6d1058bd817a98!2sWeekend%20Huarmey!5e0!3m2!1ses!2spe!4v1772137403381!5m2!1ses!2spe"
               className="w-full h-full border-0 dark-map"
               allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Google Maps Location"
+              title="Maps"
             ></iframe>
           </motion.div>
         </div>
@@ -486,11 +448,9 @@ export default function App() {
       <footer id="contacto" className="relative pt-24 pb-12 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src={FOOTER_BG} 
-            alt="Footer Background" 
+            src={FOOTER_IMG} 
+            alt="Footer" 
             className="w-full h-full object-cover opacity-70"
-            loading="lazy"
-            decoding="async"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-black"></div>
@@ -500,26 +460,24 @@ export default function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
             <div className="col-span-1 lg:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-          <img 
-            src={LOGO_URL} 
-            alt="Logo" 
-            className="h-10 w-10 rounded-full object-cover border border-weekend-purple"
-            loading="lazy"
-            decoding="async"
-            referrerPolicy="no-referrer"
-          />
+                <img 
+                  src={LOGO_URL} 
+                  alt="Logo" 
+                  className="h-10 w-10 rounded-full object-cover border border-weekend-purple"
+                  referrerPolicy="no-referrer"
+                />
                 <span className="text-white font-bold tracking-tighter text-lg uppercase">The Weekend! - huarmey</span>
               </div>
               <p className="text-white/50 text-sm leading-relaxed mb-6">
-                The Weekend! - huarmey: El espacio donde la alta cocina se encuentra con el ritmo más sofisticado de la ciudad.
+                El espacio donde la alta cocina se encuentra con el ritmo más sofisticado de la ciudad.
               </p>
               <div className="space-y-4">
                 <p className="text-weekend-neon font-bold uppercase tracking-widest text-xs">¡Síguenos!</p>
                 <div className="flex items-center gap-4">
-                  <a href="https://www.facebook.com/p/Weekend-Huarmey-100075916407028/?checkpoint_src=any" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-purple transition-colors" aria-label="Facebook">
+                  <a href="https://www.facebook.com/p/Weekend-Huarmey-100075916407028/?checkpoint_src=any" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-purple transition-colors">
                     <Facebook size={20} />
                   </a>
-                  <a href="https://www.instagram.com/weekend_huarmey/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-fuchsia transition-colors" aria-label="Instagram">
+                  <a href="https://www.instagram.com/weekend_huarmey/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-weekend-fuchsia transition-colors">
                     <Instagram size={20} />
                   </a>
                 </div>
@@ -537,7 +495,6 @@ export default function App() {
             </div>
 
             <div>
-              <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2 opacity-50">The Weekend Lounge & Restaurant</h4>
               <h4 className="text-white font-bold uppercase tracking-widest text-sm mb-6">Métodos de Pago</h4>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-white/50">
@@ -569,7 +526,7 @@ export default function App() {
 
           <div className="pt-12 border-t border-white/10 text-center">
             <p className="text-white/30 text-xs uppercase tracking-[0.3em]">
-              &copy; {new Date().getFullYear()} The Weekend Lounge & Restaurant. Todos los derechos reservados.
+              &copy; {new Date().getFullYear()} The Weekend Lounge & Restaurant.
             </p>
           </div>
         </div>
